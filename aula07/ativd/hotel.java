@@ -1,165 +1,137 @@
 package aula07.ativd;
 
+import java.util.Scanner;
+
 public class hotel {
-    import java.util.Scanner;
-    private static final int MAX_QUARTOS_HOTEL = 5;
-    private static final int MAX_RESERVAS_TOTAL = 25;
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
-        int totalQuartos = 0;
-        while (totalQuartos <= 0 || totalQuartos > MAX_QUARTOS_HOTEL) {
-            System.out.print("Informe a quantidade de quartos disponíveis no hotel (máximo " + MAX_QUARTOS_HOTEL + "): ");
-            if (scanner.hasNextInt()) {
-                totalQuartos = scanner.nextInt();
-                if (totalQuartos <= 0 || totalQuartos > MAX_QUARTOS_HOTEL) {
-                    System.out.println("Quantidade inválida! O hotel pode possuir no máximo 5 quartos.");
-                }
-            } else {
-                System.out.println("Por favor, informe um número inteiro válido.");
-                scanner.next();
+        int totalquartos = 0;
+        while (totalquartos <= 0 || totalquartos > 5) {
+            System.out.println("\nInforme a quantidade de quartos disponiveis no hotel:");
+            totalquartos = sc.nextInt();
+            if (totalquartos <= 0 || totalquartos > 5) {
+                System.out.println("\nQuantidade inválida! o hotel aceita no maximo 5 quartos");
             }
         }
-        scanner.nextLine();
 
-        int[] numerosQuartos = new int[totalQuartos];
-        int[] camasDisponiveis = new int[totalQuartos];
-        boolean quartosCadastrados = false;
-        boolean camasCadastradas = false;
+        int[] numerosdquartos = new int[totalquartos];
+        int[] camaslivres = new int[totalquartos];
 
-        String[] hospedesReservas = new String[MAX_RESERVAS_TOTAL];
-        int[] quartosReservados = new int[MAX_RESERVAS_TOTAL];
-        int totalReservas = 0;
+        String[] nomehospedes = new String[25];
+        int[] quartosreservados = new int[25];
 
+        int totalreservas = 0;
+        boolean cadastrounumero = false;
         int opcao = 0;
+
         do {
-            System.out.println("\n=== GESTÃO DE RESERVAS - SUNSTAY ===");
-            System.out.println("1 – Registrar número dos quartos");
-            System.out.println("2 – Registrar quantidade de camas");
-            System.out.println("3 – Reservar quarto");
-            System.out.println("4 – Consultar reservas por quarto");
-            System.out.println("5 – Consultar reservas por hóspede");
-            System.out.println("6 – Encerrar sistema");
-            System.out.print("Opção: ");
-
-            if (!scanner.hasNextInt()) {
-                System.out.println("Opção inválida!");
-                scanner.next();
-                continue;
-            }
-
-            opcao = scanner.nextInt();
-            scanner.nextLine();
+            System.out.println("\n---- Menu dos sistema ----");
+            System.out.println("1 - Registrar numero dos quartos.");
+            System.out.println("2 - Registrar quantidade de camas.");
+            System.out.println("3 - Reservar quarto.");
+            System.out.println("4 - Consultar reservas por quarto.");
+            System.out.println("5 - Consultar reservas por hospede.");
+            System.out.println("6 - Encerrar sistema.");
+            System.out.println("Escolha uma opção:");
+            opcao = sc.nextInt();
+            sc.nextLine();
 
             switch (opcao) {
                 case 1:
-                    for (int i = 0; i < totalQuartos; i++) {
-                        System.out.print("Informe o número do Quarto " + (i + 1) + ": ");
-                        numerosQuartos[i] = scanner.nextInt();
+                    for (int i = 0; i < totalquartos; i++) {
+                        System.out.println("Informe o numero do quarto" + (i + 1));
+                        numerosdquartos[i] = sc.nextInt();
                     }
-                    scanner.nextLine();
-                    quartosCadastrados = true;
+                    cadastrounumero = true;
                     break;
 
                 case 2:
-                    if (!quartosCadastrados) {
-                        System.out.println("Registre os quartos primeiro (Opção 1).");
+                    if (!cadastrounumero) {
+                        System.out.println("Registe os numeros dos quartos primeiro ");
                         break;
                     }
-                    for (int i = 0; i < totalQuartos; i++) {
-                        System.out.print("Quarto " + numerosQuartos[i] + " -> quantidade de camas: ");
-                        camasDisponiveis[i] = scanner.nextInt();
+                    for (int i = 0; i < totalquartos; i++) {
+                        System.out.println("Quarto" + numerosdquartos[i] + "Quantidade de camas:");
+                        camaslivres[i] = sc.nextInt();
                     }
-                    scanner.nextLine();
-                    camasCadastradas = true;
                     break;
 
                 case 3:
-                    if (!quartosCadastrados || !camasCadastradas) {
-                        System.out.println("É necessário cadastrar os quartos e as camas primeiro.");
-                        break;
-                    }
-                    if (totalReservas >= MAX_RESERVAS_TOTAL) {
-                        System.out.println("Limite de reservas atingido!");
+                    if (totalreservas >= 25) {
+                        System.out.println("Limite de 25 reservas atingido!");
                         break;
                     }
 
-                    System.out.print("Informe o número do quarto: ");
-                    int numQuarto = scanner.nextInt();
-                    scanner.nextLine();
+                    System.out.println("Informe o numero do quarto:");
+                    int numquartoreserva = sc.nextInt();
+                    sc.nextLine();
 
-                    int idxQuarto = -1;
-                    for (int i = 0; i < totalQuartos; i++) {
-                        if (numerosQuartos[i] == numQuarto) {
-                            idxQuarto = i;
+                    int posicaoencontrada = -1;
+                    for (int i = 0; i < totalquartos; i++) {
+                        if (numerosdquartos[i] == numquartoreserva) {
+                            posicaoencontrada = i;
                             break;
                         }
                     }
-
-                    if (idxQuarto == -1) {
+                    if (posicaoencontrada == -1) {
                         System.out.println("Este quarto não existe!");
-                    } else if (camasDisponiveis[idxQuarto] <= 0) {
-                        System.out.println("Não há camas disponíveis neste quarto!");
+                    } else if (camaslivres[posicaoencontrada] <= 0) {
+                        System.out.println("Não tem camas disponiveis neste quarto.");
                     } else {
-                        System.out.print("Informe o nome do hóspede: ");
-                        String nomeHospede = scanner.nextLine();
+                        System.out.println("Informe o nome do hospede");
+                        String nomehospede = sc.nextLine();
 
-                        hospedesReservas[totalReservas] = nomeHospede;
-                        quartosReservados[totalReservas] = numQuarto;
-                        totalReservas++;
-                        camasDisponiveis[idxQuarto]--;
+                        nomehospedes[totalreservas] = nomehospede;
+                        quartosreservados[totalreservas] = numquartoreserva;
 
-                        System.out.println("Reserva realizada com sucesso!");
+                        totalreservas++;
+                        camaslivres[posicaoencontrada]--;
+
+                        System.out.println("Reserva realizada com suecesso");
                     }
                     break;
 
                 case 4:
-                    if (!quartosCadastrados) {
-                        System.out.println("Nenhum quarto cadastrado até o momento.");
-                        break;
-                    }
-                    System.out.print("Informe o número do quarto: ");
-                    int quartoConsulta = scanner.nextInt();
-                    scanner.nextLine();
+                    System.out.println("Informe o numero do quarto: ");
+                    int numconsultaquarto = sc.nextInt();
 
-                    boolean existeQuarto = false;
-                    for (int q : numerosQuartos) {
-                        if (q == quartoConsulta) {
-                            existeQuarto = true;
+                    boolean quartoexiste = false;
+                    for (int i = 0; i < totalquartos; i++) {
+                        if (numerosdquartos[i] == numconsultaquarto) {
+                            quartoexiste = true;
                             break;
                         }
                     }
-
-                    if (!existeQuarto) {
+                    if (!quartoexiste) {
                         System.out.println("Este quarto não existe!");
                     } else {
-                        boolean temReserva = false;
-                        for (int i = 0; i < totalReservas; i++) {
-                            if (quartosReservados[i] == quartoConsulta) {
-                                System.out.println("Hóspede: " + hospedesReservas[i]);
-                                temReserva = true;
+                        boolean encontroureserva = false;
+                        for (int i = 0; i < totalreservas; i++) {
+                            if (quartosreservados[i] == numconsultaquarto) {
+                                System.out.println("Hospde:" + nomehospedes[i]);
+                                encontroureserva = true;
                             }
                         }
-                        if (!temReserva) {
-                            System.out.println("Não há reservas para este quarto!");
+                        if (!encontroureserva) {
+                            System.out.println("Não tem reservas para este quarto!");
                         }
                     }
                     break;
 
                 case 5:
-                    System.out.print("Informe o nome do hóspede: ");
-                    String nomeConsulta = scanner.nextLine();
+                    System.out.println("Informe o nome do hospede:");
+                    String nomeconsulta = sc.nextLine();
 
-                    boolean encontrouHospede = false;
-                    for (int i = 0; i < totalReservas; i++) {
-                        if (hospedesReservas[i].equalsIgnoreCase(nomeConsulta)) {
-                            System.out.println("Reserva no Quarto: " + quartosReservados[i]);
-                            encontrouHospede = true;
+                    boolean encontrouhospede = false;
+                    for (int i = 0; i < totalreservas; i++) {
+                        if (nomehospedes[i].equalsIgnoreCase(nomeconsulta)) {
+                            System.out.println("Quarto reservado:" + quartosreservados[i]);
+                            encontrouhospede = true;
                         }
                     }
-                    if (!encontrouHospede) {
-                        System.out.println("Não há reservas para este hóspede!");
+                    if (!encontrouhospede) {
+                        System.out.println("Não tem reservas para este hospede!");
                     }
                     break;
 
@@ -168,12 +140,12 @@ public class hotel {
                     break;
 
                 default:
-                    System.out.println("Opção inválida!");
+                    System.out.println("Opção invalida!");
                     break;
             }
+
         } while (opcao != 6);
 
-        scanner.close();
+        sc.close();
     }
-}
 }
