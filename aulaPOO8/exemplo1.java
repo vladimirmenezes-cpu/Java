@@ -1,8 +1,7 @@
 package aulaPOO8;
 
-public class exemplo1 {
-
-//sem parametro e sem retorno 
+public class Exemplo1 {
+    //sem parametro e sem retorno 
     public static void mensagem() {
         System.out.println("Seja bem vindo");
     }
