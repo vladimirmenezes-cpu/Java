@@ -14,11 +14,12 @@ public class ContatoApp {
             System.out.println("\n========= AGENDA DE CONTATOS =========");
             System.out.println("1 - Cadastrar contato pessoal");
             System.out.println("2 - Cadastrar contato profissional");
-            System.out.println("3 - Listar todos os contatos");
-            System.out.println("4 - Pesquisar contato");
-            System.out.println("5 - Alterar contato");
-            System.out.println("6 - Excluir contato");
-            System.out.println("7 - Sair");
+            System.out.println("3 - Cadastrar contato de emergência");
+            System.out.println("4 - Listar todos os contatos");
+            System.out.println("5 - Pesquisar contato");
+            System.out.println("6 - Alterar contato");
+            System.out.println("7 - Excluir contato");
+            System.out.println("8 - Sair");
             System.out.print("Escolha uma opção: ");
 
             opcao = sc.nextInt();
@@ -47,6 +48,13 @@ public class ContatoApp {
                 System.out.println("Contato profissional adicionado com sucesso!");
 
             } else if (opcao == 3) {
+                System.out.print("Nome: ");
+                String nome = sc.nextLine();
+
+
+
+
+                }  else if (opcao == 3) {
                 if (contatos.isEmpty()) {
                     System.out.println("Nenhum contato cadastrado.");
                 } else {
