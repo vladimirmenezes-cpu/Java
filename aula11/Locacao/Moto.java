@@ -1,0 +1,13 @@
+package aula11.Locacao;
+
+public class Moto extends Veiculo {
+    public Moto(String placa, String modelo, int ano, double valorDiaria){
+        super(placa, modelo, ano, valorDiaria);
+    }
+
+    @Override
+    public String exibirDados() {
+        return super.exibirDados() + "\nTipo: Moto";
+    }
+}
+
