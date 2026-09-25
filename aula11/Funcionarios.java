@@ -1,6 +1,6 @@
 package aula11;
 
-public class Funcionarios {
+public abstract class Funcionarios implements Pagamento {
 
     private String nome;
     private String cpf;
@@ -28,5 +28,10 @@ public class Funcionarios {
 
         public String exibirDados(){
             return "nome:" + nome + "\nCPF:" + cpf;
+        }
+
+        @Override 
+        public double calcularPagamento(double bonus) {
+            return calcularPagamento() + bonus;
         }
 }
