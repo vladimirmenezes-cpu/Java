@@ -3,7 +3,6 @@ package aula13;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.classfile.BufWriter;
 
 public class Ex06 {
     public static void main(String[] args) {

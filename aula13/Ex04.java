@@ -2,7 +2,6 @@ package aula13;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.SecureDirectoryStream;
 
 public class Ex04 {
     public static void main(String[] args) {
